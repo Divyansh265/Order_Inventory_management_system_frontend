@@ -34,15 +34,13 @@ npm install
 
 ### 2. Set up environment variables
 
-The frontend needs to know where the backend API is. Create a `.env.local` file in the `frontend/` folder:
+The frontend needs to know where the backend API is. Create a `.env` file in the `frontend/` folder:
 
 ```env
 VITE_API_URL=/api/v1
 ```
 
 This uses Vite's built-in proxy to forward API requests to `http://localhost:5000`, which avoids any CORS issues during local development.
-
-> `.env.local` is already in `.gitignore` so it won't be committed.
 
 ### 3. Make sure the backend is running
 
@@ -69,10 +67,10 @@ The app opens at **http://localhost:5173**
 
 Once the backend is seeded, you can log in with:
 
-| Role  | Email                | Password       |
-|-------|----------------------|----------------|
-| Admin | admin@example.com    | password123    |
-| Staff | staff@example.com    | password123456 |
+| Role  | Email             | Password       |
+| ----- | ----------------- | -------------- |
+| Admin | admin@example.com | password123    |
+| Staff | staff@example.com | password123456 |
 
 Admin can do everything. Staff can view products and orders, and create orders, but cannot edit products or change order statuses.
 
@@ -80,11 +78,11 @@ Admin can do everything. Staff can view products and orders, and create orders, 
 
 ## Available Scripts
 
-| Script            | What it does                              |
-|-------------------|-------------------------------------------|
-| `npm run dev`     | Start the development server              |
+| Script            | What it does                                      |
+| ----------------- | ------------------------------------------------- |
+| `npm run dev`     | Start the development server                      |
 | `npm run build`   | Build the app for production (outputs to `dist/`) |
-| `npm run preview` | Preview the production build locally      |
+| `npm run preview` | Preview the production build locally              |
 
 ---
 
@@ -98,7 +96,7 @@ frontend/
 │   │
 │   ├── components/
 │   │   ├── common/
-│   │   │   ├── Alert.jsx         # Custom popup alerts (replaces browser alert/confirm)
+│   │   │   ├── Alert.jsx         # Custom popup alerts
 │   │   │   ├── Badge.jsx         # Status and role badges
 │   │   │   ├── Modal.jsx         # Reusable modal wrapper
 │   │   │   ├── Pagination.jsx    # Pagination controls
@@ -133,8 +131,7 @@ frontend/
 │   ├── main.jsx                  # React entry point
 │   └── index.css                 # Tailwind base styles
 │
-├── .env                          # Production environment variables (committed)
-├── .env.local                    # Local overrides (not committed)
+├── .env                          # Production environment variables
 ├── vite.config.js                # Vite config with dev proxy
 ├── tailwind.config.js            # Tailwind config with custom maroon color
 ├── vercel.json                   # Vercel SPA routing fix
@@ -162,6 +159,7 @@ frontend/
 When you log in, the backend returns an access token (valid 1 day) and a refresh token (valid 7 days). Both are stored in `localStorage`.
 
 The Axios instance automatically:
+
 1. Attaches the access token to every request via the `Authorization` header
 2. If a request returns 401 (token expired), it tries to refresh the token automatically
 3. If the refresh also fails, it clears storage and redirects to `/login`
@@ -180,12 +178,12 @@ This means the browser never makes a cross-origin request, so there are no CORS 
 
 ## Environment Variables
 
-| Variable       | Description                                      | Example                                      |
-|----------------|--------------------------------------------------|----------------------------------------------|
-| `VITE_API_URL` | Base URL for all API requests                    | `/api/v1` (local) or full URL (production)   |
+| Variable       | Description                   | Example                                    |
+| -------------- | ----------------------------- | ------------------------------------------ |
+| `VITE_API_URL` | Base URL for all API requests | `/api/v1` (local) or full URL (production) |
 
-For local development, put this in `.env.local`:
+For local development
+
 ```env
 VITE_API_URL=/api/v1
 ```
-
