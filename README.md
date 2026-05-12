@@ -134,7 +134,6 @@ frontend/
 ├── .env                          # Production environment variables
 ├── vite.config.js                # Vite config with dev proxy
 ├── tailwind.config.js            # Tailwind config with custom maroon color
-├── vercel.json                   # Vercel SPA routing fix
 └── package.json
 ```
 
